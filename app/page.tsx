@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { saveCheck } from "@/lib/supabase";
 
 type Step = "start" | "bmi" | "medication" | "disorders" | "result";
 type Result = "eligible" | "not-eligible" | null;
@@ -27,6 +28,13 @@ export default function Home() {
   const [selectedDisorders, setSelectedDisorders] = useState<number[]>([]);
   const [result, setResult] = useState<Result>(null);
   const [resultReason, setResultReason] = useState("");
+  const saved = useRef(false);
+
+  const save = (r: "eligible" | "not-eligible", bmiVal: number, med: boolean | null, disCount: number) => {
+    if (saved.current) return;
+    saved.current = true;
+    saveCheck({ bmi: bmiVal, has_medication: med, disorders_count: disCount, result: r });
+  };
 
   const calcBmi = () => {
     const h = parseFloat(height) / 100;
@@ -52,6 +60,7 @@ export default function Home() {
       setResultReason(
         "BMIが25未満のため、肥満には該当しません。肥満症治療薬の適応対象外となります。"
       );
+      save("not-eligible", calculated, null, 0);
       setStep("result");
     } else {
       setStep("medication");
@@ -64,12 +73,14 @@ export default function Home() {
       setResultReason(
         "肥満症治療薬の保険適応には、高血圧・脂質異常症・2型糖尿病のいずれかで薬物治療中であることが必要です。"
       );
+      save("not-eligible", bmi!, false, 0);
       setStep("result");
     } else if (bmi! >= 35) {
       setResult("eligible");
       setResultReason(
         "高度肥満（BMI 35以上）に該当し、対象疾患の治療中のため、肥満症治療薬の保険適応となる可能性があります。"
       );
+      save("eligible", bmi!, true, 0);
       setStep("result");
     } else if (bmi! >= 27) {
       setStep("disorders");
@@ -78,6 +89,7 @@ export default function Home() {
       setResultReason(
         "肥満症治療薬の保険適応にはBMI 27以上が必要です。まずは食事療法・運動療法について、かかりつけ医にご相談ください。"
       );
+      save("not-eligible", bmi!, true, 0);
       setStep("result");
     }
   };
@@ -89,7 +101,8 @@ export default function Home() {
   };
 
   const handleDisordersSubmit = () => {
-    if (selectedDisorders.length >= 2) {
+    const r = selectedDisorders.length >= 2 ? "eligible" : "not-eligible";
+    if (r === "eligible") {
       setResult("eligible");
       setResultReason(
         `対象疾患の治療中であり、肥満に関連する健康障害を${selectedDisorders.length}つお持ちのため、肥満症治療薬の保険適応となる可能性があります。`
@@ -100,6 +113,7 @@ export default function Home() {
         "BMI 27〜35の場合、肥満に関連する健康障害が2つ以上必要です。該当しない場合も、生活習慣の改善で効果が期待できます。"
       );
     }
+    save(r, bmi!, true, selectedDisorders.length);
     setStep("result");
   };
 
@@ -111,6 +125,7 @@ export default function Home() {
     setSelectedDisorders([]);
     setResult(null);
     setResultReason("");
+    saved.current = false;
   };
 
   const steps = [
