@@ -5,72 +5,64 @@
 <style>
   @page { size: A4; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { 
-    width: 210mm; height: 297mm; 
-    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  body {
+    width: 210mm; height: 297mm;
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
     background: white; color: #1a1a1a;
     display: flex; flex-direction: column;
+    overflow: hidden;
   }
   .header {
     background: linear-gradient(135deg, #0d9488, #059669);
-    color: white; padding: 32px 40px; text-align: center;
+    color: white; padding: 36px 36px; text-align: center;
   }
-  .header h1 { font-size: 28px; font-weight: 600; margin-bottom: 6px; letter-spacing: 2px; }
-  .header p { font-size: 14px; opacity: 0.9; }
-  .main { flex: 1; padding: 28px 40px; }
+  .header h1 { font-size: 42px; font-weight: 600; letter-spacing: 3px; }
+  .header p { font-size: 20px; opacity: 0.9; margin-top: 8px; }
+  .main { flex: 1; padding: 24px 30px; display: flex; flex-direction: column; justify-content: space-between; }
   .intro {
     background: #f0fdf4; border: 2px solid #bbf7d0; border-radius: 12px;
-    padding: 20px 24px; margin-bottom: 24px; text-align: center;
+    padding: 18px 24px; text-align: center;
   }
-  .intro p { font-size: 15px; line-height: 1.8; color: #166534; }
-  .intro strong { font-size: 17px; }
+  .intro p { font-size: 22px; line-height: 1.7; color: #166534; }
+  .intro strong { font-size: 28px; }
   .section-title {
-    font-size: 16px; font-weight: 900; color: #0d9488;
-    border-bottom: 3px solid #0d9488; padding-bottom: 6px;
-    margin-bottom: 16px;
+    font-size: 24px; font-weight: 800; color: #0d9488;
+    border-bottom: 3px solid #0d9488; padding-bottom: 4px;
+    margin-top: 16px; margin-bottom: 12px;
   }
   .conditions {
     display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-    margin-bottom: 24px;
   }
   .condition {
-    background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;
-    padding: 16px;
+    background: #f8fafc; border: 1px solid #d1d5db; border-radius: 10px;
+    padding: 14px 16px;
   }
   .condition .num {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 24px; height: 24px; border-radius: 50%;
-    background: #0d9488; color: white; font-size: 12px; font-weight: 900;
-    margin-bottom: 6px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #0d9488; color: white; font-size: 18px; font-weight: 900;
+    margin-bottom: 4px;
   }
-  .condition h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .condition p { font-size: 11px; color: #64748b; line-height: 1.5; }
+  .condition h3 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .condition p { font-size: 17px; color: #475569; line-height: 1.5; }
   .qr-section {
-    background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
-    padding: 24px; display: flex; align-items: center; gap: 28px;
-    margin-bottom: 20px;
+    background: #f0f9ff; border: 3px solid #0d9488; border-radius: 16px;
+    padding: 24px 28px; display: flex; align-items: center; gap: 28px;
+    margin-top: 18px;
   }
-  .qr-section img { width: 140px; height: 140px; flex-shrink: 0; }
-  .qr-text h3 { font-size: 20px; font-weight: 900; color: #0d9488; margin-bottom: 8px; }
-  .qr-text p { font-size: 13px; color: #475569; line-height: 1.7; }
-  .qr-text .url { font-size: 11px; color: #94a3b8; margin-top: 6px; word-break: break-all; }
-  .steps {
-    display: flex; gap: 12px; margin-bottom: 24px;
-  }
-  .step {
-    flex: 1; text-align: center; background: white;
-    border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 8px;
-  }
-  .step .icon { font-size: 24px; margin-bottom: 6px; }
-  .step .label { font-size: 11px; font-weight: 700; color: #0d9488; margin-bottom: 2px; }
-  .step .desc { font-size: 10px; color: #64748b; }
+  .qr-section img.qr { width: 160px; height: 160px; flex-shrink: 0; }
+  .qr-text { flex: 1; }
+  .qr-text h3 { font-size: 28px; font-weight: 800; color: #0d9488; margin-bottom: 8px; white-space: nowrap; }
+  .qr-text p { font-size: 20px; color: #334155; line-height: 1.7; }
+  .qr-text .url { font-size: 14px; color: #94a3b8; margin-top: 6px; }
+  .phone-icon { width: 150px; height: auto; flex-shrink: 0; }
   .note {
     background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;
-    padding: 12px 16px; font-size: 10px; color: #92400e; line-height: 1.6;
+    padding: 10px 16px; font-size: 13px; color: #92400e; line-height: 1.5;
+    margin-top: 16px;
   }
   .footer {
-    background: #f1f5f9; padding: 16px 40px; text-align: center;
-    font-size: 9px; color: #94a3b8; line-height: 1.6;
+    text-align: center; font-size: 10px; color: #b0b0b0; margin-top: 10px; padding-bottom: 4px;
   }
 </style>
 </head>
@@ -83,81 +75,54 @@
     <div class='intro'>
       <p>
         <strong>肥満症は「治療できる病気」です。</strong><br>
-        2023年より、一定の条件を満たす方には<br>
-        肥満症治療薬が保険適用で使用できるようになりました。
+        一定の条件を満たす方には、<br>肥満症治療薬が保険適用で使用できます。
       </p>
     </div>
-    
+
     <div class='section-title'>保険適応の主な条件</div>
     <div class='conditions'>
       <div class='condition'>
         <div class='num'>1</div>
         <h3>BMI 27以上</h3>
-        <p>身長と体重から計算されるBMIが27以上であることが必要です</p>
+        <p>身長と体重から計算される<br>BMIが27以上であること</p>
       </div>
       <div class='condition'>
         <div class='num'>2</div>
         <h3>対象疾患の治療中</h3>
-        <p>高血圧・脂質異常症・2型糖尿病のいずれかで薬物治療を受けていること</p>
+        <p>高血圧・脂質異常症・<br>2型糖尿病のいずれかで薬物治療中</p>
       </div>
       <div class='condition'>
         <div class='num'>3</div>
-        <h3>健康障害が2つ以上</h3>
-        <p>BMI 27〜35の方は、肥満に関連する健康障害が2つ以上必要です</p>
+        <h3>BMI別の追加条件</h3>
+        <p><b>BMI 35以上</b>：条件1・2を満たせば対象<br><b>BMI 27〜35</b>：健康障害が2つ以上必要</p>
       </div>
       <div class='condition'>
         <div class='num'>4</div>
         <h3>生活習慣改善の実施</h3>
-        <p>食事療法・運動療法を行っても十分な効果が得られていないこと</p>
+        <p>食事・運動療法を行っても<br>十分な効果が得られていないこと</p>
       </div>
     </div>
 
     <div class='qr-section'>
-      <img src='data:image/png;base64,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' alt='QR Code' />
+      <img class='qr' src='data:image/png;base64,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' alt='QR Code' />
       <div class='qr-text'>
         <h3>スマホで今すぐチェック</h3>
         <p>
-          QRコードを読み取るだけで、<br>
-          あなたが保険適応の対象となる<br>
-          可能性があるか確認できます。<br>
+          QRコードを読み取るだけで<br>
+          保険適応の対象か確認できます。<br>
           所要時間はわずか1分です。
         </p>
         <div class='url'>https://obesity-checker-tau.vercel.app</div>
       </div>
-    </div>
-
-    <div class='section-title'>チェックの流れ</div>
-    <div class='steps'>
-      <div class='step'>
-        <div class='icon'>📏</div>
-        <div class='label'>STEP 1</div>
-        <div class='desc'>身長・体重を入力<br>BMIを自動計算</div>
-      </div>
-      <div class='step'>
-        <div class='icon'>💊</div>
-        <div class='label'>STEP 2</div>
-        <div class='desc'>現在の治療状況を<br>確認します</div>
-      </div>
-      <div class='step'>
-        <div class='icon'>📋</div>
-        <div class='label'>STEP 3</div>
-        <div class='desc'>関連する健康障害を<br>チェックします</div>
-      </div>
-      <div class='step'>
-        <div class='icon'>✅</div>
-        <div class='label'>結果表示</div>
-        <div class='desc'>適応の可能性を<br>すぐにお知らせ</div>
-      </div>
+      <img class='phone-icon' src='phone-icon.png' alt='スマホ' />
     </div>
 
     <div class='note'>
-      ※ このチェックは簡易的なセルフチェックであり、医療行為ではありません。
-      実際の診断・処方は、肥満症治療の教育認定施設にて専門医が行います。
-      チェック結果をもとに、かかりつけ医にご相談ください。
+      ※ このチェックは簡易的なセルフチェックであり、医療行為ではありません。実際の診断・処方は、肥満症治療の教育認定施設にて専門医が行います。チェック結果をもとに、かかりつけ医にご相談ください。
     </div>
-  </div>
-  <div class='footer'>
-    日本肥満学会・日本肥満症治療学会「肥満症治療薬の安全・適正使用に関するステートメント」（2025年4月改訂）に基づく
+    <div class='footer'>
+      日本肥満学会・日本肥満症治療学会「肥満症治療薬の安全・適正使用に関するステートメント」（2025年4月改訂）に基づく
+    </div>
   </div>
 </body>
 </html>
