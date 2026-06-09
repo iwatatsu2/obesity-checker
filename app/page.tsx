@@ -139,7 +139,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#f0f4f8]">
       {/* Header bar */}
       <div className="bg-white border-b border-gray-100">
-        <div className="max-w-lg mx-auto px-5 py-4 flex items-center gap-3">
+        <div className="max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto px-5 py-4 flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center shadow-sm">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 12l2 2 4-4" />
@@ -157,7 +157,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="max-w-lg mx-auto px-5 py-6">
+      <div className="max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto px-5 md:px-8 py-6">
         {/* Progress bar */}
         {step !== "start" && step !== "result" && (
           <div className="mb-6">
@@ -266,40 +266,42 @@ export default function Home() {
               BMIを自動で計算します
             </p>
             <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">
-                  身長
-                </label>
-                <div className="relative">
-                  <input
-                    type="number"
-                    inputMode="decimal"
-                    value={height}
-                    onChange={(e) => setHeight(e.target.value)}
-                    placeholder="170"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-lg font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:bg-white transition"
-                  />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-400">
-                    cm
-                  </span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+                    身長
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      inputMode="decimal"
+                      value={height}
+                      onChange={(e) => setHeight(e.target.value)}
+                      placeholder="170"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-lg font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:bg-white transition"
+                    />
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-400">
+                      cm
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">
-                  体重
-                </label>
-                <div className="relative">
-                  <input
-                    type="number"
-                    inputMode="decimal"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                    placeholder="80"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-lg font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:bg-white transition"
-                  />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-400">
-                    kg
-                  </span>
+                <div>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+                    体重
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      inputMode="decimal"
+                      value={weight}
+                      onChange={(e) => setWeight(e.target.value)}
+                      placeholder="80"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-lg font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:bg-white transition"
+                    />
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-400">
+                      kg
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -410,7 +412,7 @@ export default function Home() {
                 2つ以上の該当が必要です
               </span>
             </div>
-            <div className="space-y-1.5 mb-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5 mb-5">
               {HEALTH_DISORDERS.map((d) => (
                 <button
                   key={d.id}
