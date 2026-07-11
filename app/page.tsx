@@ -602,6 +602,12 @@ export default function Home() {
           <p className="text-[10px] text-gray-300 mt-2">
             本ツールは医療行為ではありません
           </p>
+          <a
+            href="/about"
+            className="inline-block text-[11px] text-teal-500 hover:text-teal-600 underline underline-offset-2 mt-2"
+          >
+            開発者について・公式サイト
+          </a>
         </div>
       </div>
     </main>
